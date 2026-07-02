@@ -64,13 +64,13 @@ const getUserInfo = async (req, res) => {
             {
                 attributes: { exclude: ['password', 'createdAt', 'updatedAt'] }
             })
-       // console.log('**************', loggedUser.imgPath)
+        // console.log('**************', loggedUser.imgPath)
         if (loggedUser.imgPath != null) {
             imgPath = 'http://localhost:5004' + loggedUser.imgPath;
             userData = { ...loggedUser, imgPath, }
         }
 
-        
+
         //console.log(loggedUser, "----------------after img path change------------")
 
         res.status(201).send({ looggedUser: loggedUser, success: true })
@@ -103,9 +103,12 @@ const getTotalNumOfUser = async (req, res) => {
 }
 
 async function changePassword(req, res) {
-    const id = req.params.id
-    let password = req.body.pass
     try {
+        console.log("------------------")
+        const id = req.params.ID
+        console.log(id)
+        let { pass } = req.body
+        console.log(id, pass)
         // Get token from headers
         const token = req.headers['authorization']?.split(' ')[1];
         if (!token) return res.status(401).json({ success: false, msg: 'No token provided' });
@@ -114,11 +117,11 @@ async function changePassword(req, res) {
         // const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         const salt = await bcryptjs.genSaltSync(8)
-        password = await bcryptjs.hashSync(password, salt)
+        pass = await bcryptjs.hashSync(pass, salt)
 
         const result = await User.update(
             {
-                password: password,
+                password: pass,
             },
             {
                 where: { id: id }

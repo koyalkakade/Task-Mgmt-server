@@ -12,7 +12,11 @@ const app=express()
 const port=process.env.PORT||5003
 app.use(express.json());//middleware most important
 
- app.use(cors())
+// app.use(cors())
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
 // app.use(cors({
 //     origin:`http:localhost:5173`    ////wrong got error
 // }))
