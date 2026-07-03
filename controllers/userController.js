@@ -66,7 +66,7 @@ const getUserInfo = async (req, res) => {
             })
         // console.log('**************', loggedUser.imgPath)
         if (loggedUser.imgPath != null) {
-            imgPath = 'http://localhost:5004' + loggedUser.imgPath;
+            imgPath = process.env.BASE_URL + loggedUser.imgPath;
             userData = { ...loggedUser, imgPath, }
         }
 
