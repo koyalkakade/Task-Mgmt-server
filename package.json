@@ -9,7 +9,6 @@
     "multer": "^2.2.0",
     "mysql2": "^3.22.5",
     "nodemon": "^3.1.14",
-    "recharts": "^3.9.2",
     "sequelize": "^6.37.8"
   },
   "name": "task-mgmt-server",

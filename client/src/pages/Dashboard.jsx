@@ -21,7 +21,7 @@ const Dashboard = () => {
  const fetchTasks = async () => {
       try {
         const res = await getAllTask()
-        console.log('task',res)
+        console.log('dashboard task',res)
         const tasks = res.task;
 
         const total = tasks.length;
