@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { getAllTask } from "../api/api";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const Dashboard = () => {
      const [taskStats, setTaskStats] = useState({
@@ -30,6 +38,14 @@ const Dashboard = () => {
      useEffect(()=>{
         fetchTasks()
     },[])
+
+     const pieData = [
+    { name: "Pending", value: taskStats.pending },
+    { name: "In Progress", value: taskStats.inprogress },
+    { name: "Completed", value: taskStats.completed },
+  ];
+
+  const COLORS = ["#ffc107", "#0d6efd", "#198754"];
 
   return (
   
@@ -85,7 +101,36 @@ const Dashboard = () => {
       </div>
     </div>
   </div>
+   {/* Pie Chart */}
+      <div className="card shadow-sm p-4">
+        <h4 className="mb-4 text-center">Task Status Overview</h4>
 
+        <ResponsiveContainer width="100%" height={400}>
+          <PieChart>
+            <Pie
+              data={pieData}
+              cx="50%"
+              cy="50%"
+              outerRadius={140}
+              innerRadius={70}
+              dataKey="value"
+              label={({ name, percent }) =>
+                `${name} ${(percent * 100).toFixed(0)}%`
+              }
+            >
+              {pieData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+
+            <Tooltip />
+            <Legend verticalAlign="bottom" />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
   {/* <Outlet /> */}
 </main>
         
