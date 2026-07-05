@@ -30,7 +30,7 @@ const Navbar = () => {
 
    const profileImage =
           user?.imgPath && user.imgPath.trim() !== ""
-              ? `http://localhost:5004${user.imgPath}`
+              ? `${user.imgPath}`
               : defaultAvatar;
 
   return (
