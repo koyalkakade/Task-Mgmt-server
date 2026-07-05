@@ -27,10 +27,6 @@ async function connectDB() {
     }
 }
 
-module.exports = { sequelize, connectDB };
-
-Y
-
 connectDB()
 
 module.exports = {sequelize};
