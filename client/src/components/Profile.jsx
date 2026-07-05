@@ -33,7 +33,7 @@ function Profile() {
 
     const profileImage =
         user?.imgPath && user.imgPath.trim() !== ""
-            ? `http://localhost:5004${user.imgPath}`
+            ? `${user.imgPath}`
             : defaultAvatar;
 
     const handleChange = (e) => {
