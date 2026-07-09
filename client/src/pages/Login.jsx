@@ -83,7 +83,9 @@ const Login = () => {
                   Login
                 </button>
               </form>
-
+              <p className="mt-3" style={{ marginLeft: "370px" }}>
+                <Link to="/forgot-password">Forget Password</Link>
+              </p>
               <p className="text-center mt-3">
                 Don&apos;t have account? <Link to="/register">Register</Link>
               </p>

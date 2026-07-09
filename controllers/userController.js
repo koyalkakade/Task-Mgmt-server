@@ -2,6 +2,8 @@ const User = require('../models/userModel')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
+const otpStore = require("../utils/otpStore");
+
 
 const register = async (req, res) => {
     console.log(req.body, "=========")
@@ -142,6 +144,30 @@ async function changePassword(req, res) {
     }
 }
 
+
+const changePasswordOTP = async (req, res) => {
+
+    const { email, password } = req.body;
+
+    const hash = await bcrypt.hash(password, 8);
+
+    await User.update(
+        { password: hash },
+        {
+            where: { email }
+        }
+    );
+
+    otpStore.delete(email);
+
+    res.json({
+        success: true,
+        message: "Password changed successfully"
+    });
+
+};
+
 module.exports = {
-    register, login, getUserInfo, getAllUser, getTotalNumOfUser, changePassword
+    register, login, getUserInfo, getAllUser, getTotalNumOfUser, changePassword,
+    changePasswordOTP
 }

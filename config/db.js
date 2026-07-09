@@ -1,32 +1,29 @@
-const { Sequelize } = require("sequelize");
-require("dotenv").config();
+const {Sequelize} = require('sequelize')
 
-const sequelize = new Sequelize(process.env.DB_URL, {
-    dialect: "postgres",
-    logging: false, // Optional: Disable SQL logs
-    dialectOptions: {
-        ssl: process.env.NODE_ENV === "production"
-            ? {
-                  require: true,
-                  rejectUnauthorized: false,
-              }
-            : false,
-    },
-});
+require('dotenv').config()
 
-async function connectDB() {
+const sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+        host:process.env.DB_HOST,
+        dialect:'mysql'
+    }
+)
+
+async function connectDB (){
     try {
-        await sequelize.authenticate();
-        console.log("Database connected successfully");
+        await sequelize.authenticate()
+        console.log("Database connected successfully")
 
-        await sequelize.sync({ alter: false });
-        console.log("Models synchronized successfully");
+        await sequelize.sync({alter:false})
+        console.log("Models synchronized successfully")
     } catch (error) {
-        console.error("Database connection error:", error);
-        process.exit(1);
+        console.log("database connection error", error)
     }
 }
 
 connectDB()
 
-module.exports = {sequelize};
+module.exports = {sequelize}

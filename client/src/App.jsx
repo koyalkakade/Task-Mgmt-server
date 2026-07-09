@@ -17,6 +17,8 @@ import Dashboard from './pages/Dashboard'
 import MyTask from './components/tasks/MyTask'
 import UserTasks from './components/tasks/UserTasks'
 import Profile from './components/Profile'
+import ForgotPassword from './components/ForgotPassword'
+import ChangePassword from './components/ChangePassword'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,6 +28,8 @@ function App() {
       <ToastContainer position="top-right" />
 
       <Routes>
+        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="/change-password" element={<ChangePassword />}></Route>
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<ProtectedRoute ><Layout /></ProtectedRoute>} >
